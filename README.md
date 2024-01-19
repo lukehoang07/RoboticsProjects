@@ -87,7 +87,7 @@ def add(x:int, y:int) -> int:
   return x + y
 ```
 
-## Well Documented Example
+## Documented Example
 ```py
 def tonysEquation(x:int, y:int, m:int, d:int) -> float:
   """Takes the sum of two numbers x and y, multiplies them by m, divides them by d, and returns the resault.
