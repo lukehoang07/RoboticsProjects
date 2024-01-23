@@ -87,22 +87,46 @@ def add(x:int, y:int) -> int:
   return x + y
 ```
 
-## Documented Example
+# Working with Files
+Sometimes the data you're given is not in a python file. Sometimes it in a formate like JSON, TOML, CSV, or a database file. Python comes with different ways to read this information and create Python objects out of them.
+
+## Opening a File
+This first thing that you will always need to do is open a file, then read the contents. Python comes with a nice, easy way to open, read, and close files all at once. You can do this with the <code>with</code> statement. Here's the general structure:
+
 ```py
-def tonysEquation(x:int|float, y:int|float, m:int|float, d:int|float) -> float:
-  """Takes the sum of two numbers x and y, multiplies them by m, divides them by d, and returns the resault.
+with open("path/to/file.json", "r") as f:
+  content = f.read()
+print(f)
+```
 
-  Args:
-    x:int|float - left additive
-    y:int|float - right additive
-    m:int|float - right factor
-    d:int|float - right divider
+This is how you fetch a string of the file you want. It is important to know basic eascape codes. Here's a question: what defines a line in a file? The answer is simple: \n. That means newline, and sperates the lines in a file. So, if you ```.split("\n")``` on the file string, you can loop through the lines.
 
-  Returns:
-    ((x+y)*m)/d
-  """
-  sum:int = x + y
-  product:int = sum * m
-  dividend:float = product / d
-  return dividend
+### JSON
+Sometimes file are structured in a specific way, and python can create objects out of it by itself. The best example is JSON. That stands for JavaScript Object Notation. It is really common for storing data. [Here] (https://developer.mozilla.org/en-US/docs/Learn/JavaScript/Objects/JSON) is some stuff to learn JSON. 
+
+The first thing that you need to do is import the ```json``` library in your file. Normally, libraries go at the very top of the file. Then, you call ```json.loads(<json_str>)``` to make an object out of the data provided. Here's an example:
+
+#### ex.json
+```json
+{
+  "name": "Anthony",
+  "age": 16,
+  "classes": [
+    {"name": "MI", "teacher": "Smith"},
+    {"name": "Trig. H.", "teacher": "Williams"}
+  ]
+}
+```
+
+#### run.py
+```py
+import json
+
+with open("ex.json", "r") as f:
+  content = f.read()
+
+jsonDict = json.loads(content)
+print(f"Hi, I am {jsonDict['name']}, am I'm {jsonDict['name']}yo")
+for class in jsonDict['classes']:
+  print(class['name'], class['teacher'])
 ```
